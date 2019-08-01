@@ -28,24 +28,24 @@ defmodule Emojitrans do
     :world
   end
 
-  def translate(phrase) do 
+  def translate(phrase) do
     result = get_json(@json_path)
 
-    case result do 
+    case result do
       {:ok, json} ->
         translate_phrase(json)
-      
-        {:error, reason} ->
-          handle_error(reason)
+
+      {:error, reason} ->
+        handle_error(reason)
     end
   end
 
-  def translate_phrase(json) do 
+  def translate_phrase(json) do
     json
   end
 
   def handle_error(reason) do
-    raise TranslationError, reason 
+    raise TranslationError, reason
   end
 
   def get_json(filename) do
