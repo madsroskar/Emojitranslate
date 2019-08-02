@@ -21,7 +21,7 @@ defmodule Emojitrans do
     defexception [:message]
 
     def get_message(reason) do
-      "Can't translate the phrase. Reason: #{reason}"      
+      "Can't translate the phrase. Reason: #{reason}"
     end
 
     @impl true
