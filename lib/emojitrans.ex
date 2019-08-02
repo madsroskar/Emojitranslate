@@ -5,17 +5,7 @@ defmodule Emojitrans do
   Documentation for Emojitrans.
   """
 
-  @doc """
-  Hello world.
-
-  ## Examples
-
-      iex> Emojitrans.hello()
-      :world
-
-  """
-
-  @json_path "#{System.cwd()}/emoji.json"
+  @json_path "#{elem(File.cwd(), 1)}/emoji.json"
 
   defmodule TranslationError do
     defexception [:message]
@@ -43,7 +33,6 @@ defmodule Emojitrans do
   end
 
   defp translate_phrase(phrase, json) do
-    json_content = json
     words = phrase |> String.downcase() |> String.replace(~r/[\p{P}\p{S}]/, "") |> String.split()
 
     Enum.map(words, fn x -> translate_word(x, json) end) |> Enum.join("")
@@ -59,7 +48,7 @@ defmodule Emojitrans do
         end)
       end)
 
-    a = Enum.map(result, fn element -> elem(element, 1)["char"] end) |> Enum.random()
+    Enum.map(result, fn element -> elem(element, 1)["char"] end) |> Enum.random()
   end
 
   defp get_word_variations(word) do
